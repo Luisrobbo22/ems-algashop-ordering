@@ -6,6 +6,8 @@ import static com.algaworks.algashop.ordering.domain.exception.ErrorMessages.VAL
 
 public record LoyaltPoints(Integer points) implements Comparable<LoyaltPoints> {
 
+    public static final LoyaltPoints ZERO = new LoyaltPoints();
+
     public LoyaltPoints() {
         this(0);
     }
