@@ -3,6 +3,7 @@ package com.algaworks.algashop.ordering.domain.entity;
 
 import com.algaworks.algashop.ordering.domain.exception.CustomerArchivedException;
 import com.algaworks.algashop.ordering.domain.exception.ErrorMessages;
+import com.algaworks.algashop.ordering.vo.Address;
 import com.algaworks.algashop.ordering.vo.BirthDate;
 import com.algaworks.algashop.ordering.vo.CustomerId;
 import com.algaworks.algashop.ordering.vo.Document;
@@ -10,6 +11,7 @@ import com.algaworks.algashop.ordering.vo.Email;
 import com.algaworks.algashop.ordering.vo.Fullname;
 import com.algaworks.algashop.ordering.vo.LoyaltPoints;
 import com.algaworks.algashop.ordering.vo.Phone;
+import com.algaworks.algashop.ordering.vo.ZipCode;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +30,16 @@ class CustomerTest {
                 new Phone("478-256-2504"),
                 new Document("255-08-0578"),
                 false,
-                OffsetDateTime.now()
+                OffsetDateTime.now(),
+                Address.builder()
+                        .street("Bourbon Street")
+                        .number("1134")
+                        .city("New York")
+                        .state("South California")
+                        .neighborhood("North Ville")
+                        .complement("Apt. 114")
+                        .zipCode(new ZipCode("12345"))
+                        .build()
         )).withMessage("Email is not valid");
     }
 
@@ -42,7 +53,16 @@ class CustomerTest {
                 new Phone("478-256-2504"),
                 new Document("255-08-0578"),
                 false,
-                OffsetDateTime.now()
+                OffsetDateTime.now(),
+                Address.builder()
+                        .street("Bourbon Street")
+                        .number("1134")
+                        .city("New York")
+                        .state("South California")
+                        .neighborhood("North Ville")
+                        .complement("Apt. 114")
+                        .zipCode(new ZipCode("12345"))
+                        .build()
         );
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> customer.changeEmail(new Email("invalid-email"))).withMessage("Email is not valid");
@@ -61,7 +81,17 @@ class CustomerTest {
                 true,
                 OffsetDateTime.now(),
                 OffsetDateTime.now(),
-                new LoyaltPoints(10));
+                new LoyaltPoints(10),
+                Address.builder()
+                        .street("Bourbon Street")
+                        .number("1134")
+                        .city("New York")
+                        .state("South California")
+                        .neighborhood("North Ville")
+                        .complement("Apt. 114")
+                        .zipCode(new ZipCode("12345"))
+                        .build()
+        );
 
 
         Assertions.assertThatExceptionOfType(CustomerArchivedException.class)
