@@ -10,6 +10,7 @@ import com.algaworks.algashop.ordering.vo.Email;
 import com.algaworks.algashop.ordering.vo.Fullname;
 import com.algaworks.algashop.ordering.vo.LoyaltPoints;
 import com.algaworks.algashop.ordering.vo.Phone;
+import lombok.Builder;
 
 import java.time.OffsetDateTime;
 import java.util.Objects;
@@ -29,7 +30,26 @@ public class Customer {
     private LoyaltPoints loyaltyPoints;
     private Address address;
 
-    public Customer(CustomerId id, Fullname fullname, BirthDate birtDate,
+    @Builder(builderClassName = "BrandNewCustomerBuild", builderMethodName = "brandNew")
+    private static Customer createBrandNew(Fullname fullname, BirthDate birtDate, Email email, Phone phone, Document document,
+                                    Boolean promotionNotificationsAllowed, Address address) {
+
+        return new Customer(new CustomerId(),
+                fullname,
+                birtDate,
+                email,
+                phone,
+                document,
+                promotionNotificationsAllowed,
+                false,
+                OffsetDateTime.now(),
+                null,
+                LoyaltPoints.ZERO,
+                address);
+    }
+
+    @Builder(builderClassName = "ExistingCustomerBuild", builderMethodName = "existing")
+    private Customer(CustomerId id, Fullname fullname, BirthDate birtDate,
                     Email email, Phone phone, Document document,
                     Boolean promotionNotificationsAllowed, Boolean archived,
                     OffsetDateTime registeredAt, OffsetDateTime archivedAt,
@@ -48,7 +68,7 @@ public class Customer {
         this.setAddress(address);
     }
 
-    public Customer(CustomerId id, Fullname fullname, BirthDate birtDate, Email email, Phone phone, Document document,
+    private Customer(CustomerId id, Fullname fullname, BirthDate birtDate, Email email, Phone phone, Document document,
                     Boolean promotionNotificationsAllowed, OffsetDateTime registeredAt, Address address) {
 
         this.setId(id);
