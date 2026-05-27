@@ -3,12 +3,12 @@ package com.algaworks.algashop.ordering.domain.entity;
 
 import com.algaworks.algashop.ordering.domain.exception.CustomerArchivedException;
 import com.algaworks.algashop.ordering.domain.exception.ErrorMessages;
-import com.algaworks.algashop.ordering.vo.Address;
-import com.algaworks.algashop.ordering.vo.Document;
-import com.algaworks.algashop.ordering.vo.Email;
-import com.algaworks.algashop.ordering.vo.Fullname;
-import com.algaworks.algashop.ordering.vo.Phone;
-import com.algaworks.algashop.ordering.vo.ZipCode;
+import com.algaworks.algashop.ordering.domain.vo.Address;
+import com.algaworks.algashop.ordering.domain.vo.Document;
+import com.algaworks.algashop.ordering.domain.vo.Email;
+import com.algaworks.algashop.ordering.domain.vo.FullName;
+import com.algaworks.algashop.ordering.domain.vo.Phone;
+import com.algaworks.algashop.ordering.domain.vo.ZipCode;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -55,7 +55,7 @@ class CustomerTest {
                 .withMessage(ErrorMessages.ERROR_CUSTOMER_ARCHIVED);
 
         Assertions.assertThatExceptionOfType(CustomerArchivedException.class)
-                .isThrownBy(() -> customer.changeName(new Fullname("John", "Doe")))
+                .isThrownBy(() -> customer.changeName(new FullName("John", "Doe")))
                 .withMessage(ErrorMessages.ERROR_CUSTOMER_ARCHIVED);
 
         Assertions.assertThatExceptionOfType(CustomerArchivedException.class)
@@ -69,7 +69,7 @@ class CustomerTest {
         Customer customer = CustomerTestDataBuilder.existingCustomer().build();
 
         Assertions.assertWith(customer,
-                c -> assertThat(c.fullname()).isEqualTo(new Fullname("Anonymous", "Anonymous")),
+                c -> assertThat(c.fullname()).isEqualTo(new FullName("Anonymous", "Anonymous")),
                 c -> assertThat(c.email()).isNotEqualTo(new Email("john.doe@gmail.com")),
                 c -> assertThat(c.phone()).isEqualTo(new Phone("000-000-0000")),
                 c -> assertThat(c.document()).isEqualTo(new Document("000-00-0000")),

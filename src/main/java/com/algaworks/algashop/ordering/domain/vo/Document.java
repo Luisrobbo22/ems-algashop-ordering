@@ -1,4 +1,4 @@
-package com.algaworks.algashop.ordering.vo;
+package com.algaworks.algashop.ordering.domain.vo;
 
 import java.util.Objects;
 

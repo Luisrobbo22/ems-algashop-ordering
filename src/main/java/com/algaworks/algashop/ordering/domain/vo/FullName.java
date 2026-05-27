@@ -1,13 +1,13 @@
-package com.algaworks.algashop.ordering.vo;
+package com.algaworks.algashop.ordering.domain.vo;
 
 import java.util.Objects;
 
 import static com.algaworks.algashop.ordering.domain.exception.ErrorMessages.VALIDATION_ERROR_FIRST_NAME_CANNOT_BE_BLANK;
 import static com.algaworks.algashop.ordering.domain.exception.ErrorMessages.VALIDATION_ERROR_LAST_NAME_CANNOT_BE_BLANK;
 
-public record Fullname(String firstName, String lastName) {
+public record FullName(String firstName, String lastName) {
 
-    public Fullname(String firstName, String lastName) {
+    public FullName(String firstName, String lastName) {
         Objects.requireNonNull(firstName);
         Objects.requireNonNull(lastName);
 

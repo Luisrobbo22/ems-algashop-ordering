@@ -1,14 +1,14 @@
 package com.algaworks.algashop.ordering.domain.entity;
 
-import com.algaworks.algashop.ordering.vo.Address;
-import com.algaworks.algashop.ordering.vo.BirthDate;
-import com.algaworks.algashop.ordering.vo.CustomerId;
-import com.algaworks.algashop.ordering.vo.Document;
-import com.algaworks.algashop.ordering.vo.Email;
-import com.algaworks.algashop.ordering.vo.Fullname;
-import com.algaworks.algashop.ordering.vo.LoyaltPoints;
-import com.algaworks.algashop.ordering.vo.Phone;
-import com.algaworks.algashop.ordering.vo.ZipCode;
+import com.algaworks.algashop.ordering.domain.vo.Address;
+import com.algaworks.algashop.ordering.domain.vo.BirthDate;
+import com.algaworks.algashop.ordering.domain.vo.CustomerId;
+import com.algaworks.algashop.ordering.domain.vo.Document;
+import com.algaworks.algashop.ordering.domain.vo.Email;
+import com.algaworks.algashop.ordering.domain.vo.FullName;
+import com.algaworks.algashop.ordering.domain.vo.LoyaltPoints;
+import com.algaworks.algashop.ordering.domain.vo.Phone;
+import com.algaworks.algashop.ordering.domain.vo.ZipCode;
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
@@ -19,7 +19,7 @@ public class CustomerTestDataBuilder {
 
     public static Customer.BrandNewCustomerBuild brandNewCustomer() {
         return Customer.brandNew()
-                .fullname(new Fullname("John", "Doe"))
+                .fullname(new FullName("John", "Doe"))
                 .birtDate(new BirthDate(LocalDate.of(1997, 12, 22)))
                 .email(new Email("john.doe@gmail.com"))
                 .phone(new Phone("478-256-2504"))
@@ -42,7 +42,7 @@ public class CustomerTestDataBuilder {
                 .registeredAt(OffsetDateTime.now())
                 .archived(false)
                 .archivedAt(null)
-                .fullname(new Fullname("John", "Doe"))
+                .fullname(new FullName("John", "Doe"))
                 .birtDate(new BirthDate(LocalDate.of(1997, 12, 22)))
                 .email(new Email("john.doe@gmail.com"))
                 .phone(new Phone("478-256-2504"))
@@ -63,7 +63,7 @@ public class CustomerTestDataBuilder {
     public static Customer.ExistingCustomerBuild existingAnonymizedCustomer() {
         return Customer.existing()
                 .id(new CustomerId())
-                .fullname(new Fullname("Anonumous", "Anonymoys"))
+                .fullname(new FullName("Anonumous", "Anonymoys"))
                 .birtDate(null)
                 .email(new Email("anonymoys@anonymoys.com"))
                 .phone(new Phone("000-000-0000"))
