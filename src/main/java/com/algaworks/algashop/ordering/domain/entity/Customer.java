@@ -4,12 +4,12 @@ import com.algaworks.algashop.ordering.domain.exception.CustomerArchivedExceptio
 import com.algaworks.algashop.ordering.domain.exception.ErrorMessages;
 import com.algaworks.algashop.ordering.domain.vo.Address;
 import com.algaworks.algashop.ordering.domain.vo.BirthDate;
-import com.algaworks.algashop.ordering.domain.vo.CustomerId;
 import com.algaworks.algashop.ordering.domain.vo.Document;
 import com.algaworks.algashop.ordering.domain.vo.Email;
 import com.algaworks.algashop.ordering.domain.vo.FullName;
 import com.algaworks.algashop.ordering.domain.vo.LoyaltPoints;
 import com.algaworks.algashop.ordering.domain.vo.Phone;
+import com.algaworks.algashop.ordering.domain.vo.id.CustomerId;
 import lombok.Builder;
 
 import java.time.OffsetDateTime;
@@ -29,24 +29,6 @@ public class Customer {
     private OffsetDateTime archivedAt;
     private LoyaltPoints loyaltyPoints;
     private Address address;
-
-    @Builder(builderClassName = "BrandNewCustomerBuild", builderMethodName = "brandNew")
-    private static Customer createBrandNew(FullName fullname, BirthDate birtDate, Email email, Phone phone, Document document,
-                                           Boolean promotionNotificationsAllowed, Address address) {
-
-        return new Customer(new CustomerId(),
-                fullname,
-                birtDate,
-                email,
-                phone,
-                document,
-                promotionNotificationsAllowed,
-                false,
-                OffsetDateTime.now(),
-                null,
-                LoyaltPoints.ZERO,
-                address);
-    }
 
     @Builder(builderClassName = "ExistingCustomerBuild", builderMethodName = "existing")
     private Customer(CustomerId id, FullName fullname, BirthDate birtDate,
@@ -82,6 +64,24 @@ public class Customer {
         this.setArchived(false);
         this.setLoyaltyPoints(LoyaltPoints.ZERO);
         this.setAddress(address);
+    }
+
+    @Builder(builderClassName = "BrandNewCustomerBuild", builderMethodName = "brandNew")
+    private static Customer createBrandNew(FullName fullname, BirthDate birtDate, Email email, Phone phone, Document document,
+                                           Boolean promotionNotificationsAllowed, Address address) {
+
+        return new Customer(new CustomerId(),
+                fullname,
+                birtDate,
+                email,
+                phone,
+                document,
+                promotionNotificationsAllowed,
+                false,
+                OffsetDateTime.now(),
+                null,
+                LoyaltPoints.ZERO,
+                address);
     }
 
     public void addLoyaltyPoints(LoyaltPoints points) {

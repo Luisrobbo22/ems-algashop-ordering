@@ -6,8 +6,8 @@ import java.util.Objects;
 
 public record Money(BigDecimal value) implements Comparable<Money> {
 
-    private final static RoundingMode roundingMode = RoundingMode.HALF_EVEN;
-    private final static Money ZERO = new Money(BigDecimal.ZERO);
+    public static final Money ZERO = new Money(BigDecimal.ZERO);
+    private static final RoundingMode roundingMode = RoundingMode.HALF_EVEN;
 
     public Money(String value) {
         this(new BigDecimal(value));
@@ -34,6 +34,7 @@ public record Money(BigDecimal value) implements Comparable<Money> {
         Objects.requireNonNull(money);
         return new Money(this.value.add(money.value));
     }
+
     @Override
     public int compareTo(Money o) {
         return this.value.compareTo(o.value);
