@@ -21,23 +21,23 @@ public class OrderItem {
     private Money price;
     private Quantity quantity;
 
-    private Money ammount;
+    private Money totalAmmount;
 
     @Builder(builderClassName = "ExistingOrderItemBuilder", builderMethodName = "existing")
     public OrderItem(OrderItemId id, OrderId orderId, ProductId productId, ProductName productName, Money price,
-                     Quantity quantity, Money ammount) {
+                     Quantity quantity, Money totalAmmount) {
         this.setId(id);
         this.setOrderId(orderId);
         this.setProductId(productId);
         this.setProductName(productName);
         this.setPrice(price);
         this.setQuantity(quantity);
-        this.setAmmount(ammount);
+        this.setTotalAmmount(totalAmmount);
     }
 
     @Builder(builderClassName = "BrandNewOrderItemBuilder", builderMethodName = "brandNew")
     private static OrderItem createBrandNew(OrderId orderId, ProductId productId, ProductName productName, Money price, Quantity quantity) {
-        return new OrderItem(
+        final OrderItem orderItem = new OrderItem(
                 new OrderItemId(),
                 orderId,
                 productId,
@@ -46,6 +46,8 @@ public class OrderItem {
                 quantity,
                 Money.ZERO
         );
+        orderItem.recalculateTotals();
+        return orderItem;
     }
 
     public OrderItemId id() {
@@ -72,8 +74,12 @@ public class OrderItem {
         return quantity;
     }
 
-    public Money ammount() {
-        return ammount;
+    public Money totalAmmount() {
+        return totalAmmount;
+    }
+
+    private void recalculateTotals() {
+        this.setTotalAmmount(this.price.multiply(this.quantity));
     }
 
     private void setId(OrderItemId id) {
@@ -106,9 +112,9 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
-    private void setAmmount(Money ammount) {
-        Objects.requireNonNull(ammount);
-        this.ammount = ammount;
+    private void setTotalAmmount(Money totalAmmount) {
+        Objects.requireNonNull(totalAmmount);
+        this.totalAmmount = totalAmmount;
     }
 
 }
