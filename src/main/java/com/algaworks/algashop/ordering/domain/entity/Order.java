@@ -2,10 +2,12 @@ package com.algaworks.algashop.ordering.domain.entity;
 
 import com.algaworks.algashop.ordering.domain.vo.BillingInfo;
 import com.algaworks.algashop.ordering.domain.vo.Money;
+import com.algaworks.algashop.ordering.domain.vo.ProductName;
 import com.algaworks.algashop.ordering.domain.vo.Quantity;
 import com.algaworks.algashop.ordering.domain.vo.ShippingInfo;
 import com.algaworks.algashop.ordering.domain.vo.id.CustomerId;
 import com.algaworks.algashop.ordering.domain.vo.id.OrderId;
+import com.algaworks.algashop.ordering.domain.vo.id.ProductId;
 import lombok.Builder;
 
 import java.time.LocalDate;
@@ -81,6 +83,16 @@ public class Order {
                 null,
                 new HashSet<>()
         );
+    }
+
+    public void addItem(ProductId productId, ProductName productName, Money price, Quantity quantity) {
+        this.items.add(OrderItem.brandNew()
+                .orderId(this.id)
+                .productId(productId)
+                .productName(productName)
+                .price(price)
+                .quantity(quantity)
+                .build());
     }
 
     public OrderId id() {
